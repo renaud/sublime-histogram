@@ -1,22 +1,21 @@
 # This simple plugin is based on:
-# http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html
-
+# http://www.somebits.com/~nelson/weblog-files/countuniq.txt
 import sublime
 import sublime_plugin
 import re
+import sys
 
 
-class SortNumericallyCommand(sublime_plugin.TextCommand):
+class CreateHistogramCommand(sublime_plugin.TextCommand):
+
     def run(self, edit):
+
         regions = self.view.sel()
         if len(regions) == 1 and regions[0].empty():
             # Selection is empty, use the entire buffer.
             regions = [sublime.Region(0, self.view.size())]
+
         for region in regions:
-            lines = [self.view.substr(r) for r in self.view.lines(region)]
-            convert = lambda text: int(text) if text.isdigit() else text
-            alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
-            sorted_lines = sorted(lines, key=alphanum_key)
 
             # Determine the current line ending setting, so we can rejoin the
             # sorted lines using the correct line ending character.
@@ -27,6 +26,20 @@ class SortNumericallyCommand(sublime_plugin.TextCommand):
             elif line_endings == 'Windows':
                 line_ending_character = '\r\n'
 
-            output = line_ending_character.join(sorted_lines)
+            # Count up all the lines
+            lines = [self.view.substr(r) for r in self.view.lines(region)]
+            data = {}
+            for l in lines:
+                data[l] = data.setdefault(l, 0) + 1
+
+            # Sort the data by frequency
+            counts = list(zip(data.values(), data.keys()))
+            counts.sort()
+            counts.reverse()
+
+            # Print out the bins
+            output = ""
+            for count, item in counts:
+                output +=  "%7d %s%s" % (count, item, line_ending_character)
 
             self.view.replace(edit, region, output)

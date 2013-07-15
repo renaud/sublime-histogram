@@ -1,15 +1,25 @@
-# Sort Lines (Numerically)
+# Counting input frequency (simple histogram)
 
-Sublime Text 2 package that adds a command for sorting lines numerically rather than alphabetically.
+Sublime Text 3 package that adds a command for creating simple histograms, à la `sort | uniq -c | sort`
 
-Installation
-------------
-This package is available through [Package Control](http://wbond.net/sublime_packages/package_control), it’s called “Sort Lines (Numerically)”.
+
+About
+-----
+
+One of the most common data analysis things I do in Unix is something like
+
+    cat wines | sort | uniq -c | sort -nr
+
+Given an input file with a million bottles of wine in it, this shows me how many bottles of each type I have. It works for other things besides wine. In fact, it works for a lot of things. 
+
 
 Usage
 -----
-Just run “Sort Lines (Numerically)” from the Command Palette, or from the Edit menu, which has a keyboard shortcut as well.
+
+Just run “Create Histogram” from the Command Palette, or from the Edit menu, which has a keyboard shortcut as well.
+
 
 Credits
 -------
-Thanks to Curtis Gibby ([@curtisgibby](https://github.com/curtisgibby)) for contributions.
+
+@nelson (http://www.somebits.com/weblog/tech/python/countuniq.html)

@@ -4,7 +4,7 @@
 		"children":
 		[
 			{ "id": "permute" },
-			{ "command": "sort_numerically", "caption": "Sort Lines (Numerically)", "mnemonic": "n" }
+			{ "command": "create_histogram", "caption": "Create Histogram", "mnemonic": "n" }
 		]
 	}
 ]

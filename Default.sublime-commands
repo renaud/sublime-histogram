@@ -1,6 +1,6 @@
 [
 	{
-		"caption": "Sort Lines (Numerically)",
-		"command": "sort_numerically"
+		"caption": "Create Histogram",
+		"command": "create_histogram"
 	}
 ]
